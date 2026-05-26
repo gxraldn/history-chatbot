@@ -15,7 +15,9 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap');
 
-html, body, [data-testid="stAppViewContainer"], .stApp, [data-testid="stMain"], [data-testid="stVerticalBlock"], [data-testid="stBottomBlockContainer"] {
+html, body, [data-testid="stAppViewContainer"], .stApp, [data-testid="stMain"], 
+[data-testid="stVerticalBlock"], [data-testid="stBottomBlockContainer"], 
+section.main, .main, .block-container {
     background-color: #0e0b07 !important;
     background-image: 
         radial-gradient(ellipse 80% 50% at 50% -10%, rgba(180,120,40,0.15) 0%, transparent 70%),
@@ -25,14 +27,30 @@ html, body, [data-testid="stAppViewContainer"], .stApp, [data-testid="stMain"], 
     padding: 0 !important;
 }
 
-/* Kill whites */
-[data-testid="stSidebar"], [data-testid="stToolbar"], footer, #MainMenu, .stDeployButton, section.main > div:first-child {
+/* Force no white backgrounds */
+[data-testid="stSidebar"], [data-testid="stToolbar"], footer, #MainMenu, .stDeployButton,
+section.main > div, [data-testid="stChatInputContainer"] > div, 
+[data-testid="stBottomBlockContainer"] > div, .stChatInput {
     background-color: #0e0b07 !important;
 }
 
+/* Chat input area - full dark */
+[data-testid="stChatInputContainer"],
+[data-testid="stChatInput"],
+.stChatInput {
+    background-color: #1a1408 !important;
+    border-color: rgba(196,154,42,0.3) !important;
+}
+
+/* Remove any remaining white blocks */
+div[data-testid="stBottomBlockContainer"] {
+    background: #0e0b07 !important;
+    border-top: 1px solid rgba(196,154,42,0.2) !important;
+}
+
 .block-container {
-    max-width: 800px !important;
-    padding: 2rem 1rem 6rem !important;
+    max-width: 820px !important;
+    padding: 2rem 1rem 5rem !important;
     margin: 0 auto;
 }
 
@@ -49,42 +67,6 @@ html, body, [data-testid="stAppViewContainer"], .stApp, [data-testid="stMain"], 
     margin: 0.5rem 0;
 }
 .header-title span { color: #c49a2a; }
-
-/* Rest of your original CSS */
-[data-testid="stChatMessage"] {
-    background: transparent !important;
-    border: none !important;
-    padding: 0.4rem 0 !important;
-    gap: 0.75rem !important;
-}
-[data-testid="stChatMessage"] p,
-[data-testid="stChatMessage"] li,
-[data-testid="stChatMessage"] span,
-[data-testid="stChatMessage"] div {
-    color: #e8d9b4 !important;
-    font-family: 'Source Sans 3', sans-serif !important;
-    font-size: 0.97rem !important;
-    line-height: 1.7 !important;
-}
-[data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-user"]) [data-testid="stMarkdownContainer"] {
-    background: rgba(196,154,42,0.1) !important;
-    border: 1px solid rgba(196,154,42,0.28) !important;
-    border-radius: 16px 16px 4px 16px !important;
-    padding: 0.8rem 1.1rem !important;
-}
-[data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-assistant"]) [data-testid="stMarkdownContainer"] {
-    background: rgba(255,255,255,0.04) !important;
-    border: 1px solid rgba(255,255,255,0.07) !important;
-    border-left: 3px solid #c49a2a !important;
-    border-radius: 4px 16px 16px 16px !important;
-    padding: 0.8rem 1.1rem !important;
-}
-[data-testid="stChatInputContainer"],
-[data-testid="stChatInput"] {
-    background-color: #1a1408 !important;
-    border-color: rgba(196,154,42,0.3) !important;
-    border-radius: 12px !important;
-}
 </style>
 """, unsafe_allow_html=True)
 
