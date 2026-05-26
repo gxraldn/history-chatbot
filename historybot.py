@@ -16,11 +16,19 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap');
 
 /* ── Root & Background ── */
-.stApp {
-    background: #0e0b07;
+html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"],
+[data-testid="stBottomBlockContainer"], .main, section[data-testid="stSidebar"] {
+    background-color: #0e0b07 !important;
     background-image:
-        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(180,120,40,0.18) 0%, transparent 70%),
-        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c49a2a' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(180,120,40,0.15) 0%, transparent 70%),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c49a2a' fill-opacity='0.045'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") !important;
+}
+
+/* ── Also kill any white block that appears behind the chat input ── */
+[data-testid="stBottomBlockContainer"] {
+    background-color: #0e0b07 !important;
+    border-top: 1px solid rgba(196,154,42,0.15) !important;
+    padding-top: 0.75rem !important;
 }
 
 /* ── Hide default streamlit chrome ── */
@@ -30,14 +38,13 @@ st.markdown("""
 /* ── Main container ── */
 .block-container {
     max-width: 760px !important;
-    padding: 2rem 1.5rem 6rem !important;
+    padding: 2rem 1.5rem 5rem !important;
 }
 
-/* ── Header area ── */
+/* ── Header ── */
 .main-header {
     text-align: center;
-    padding: 3rem 0 2.5rem;
-    position: relative;
+    padding: 3rem 0 2rem;
 }
 .main-header::after {
     content: '';
@@ -55,61 +62,86 @@ st.markdown("""
 }
 .header-title {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: 2.8rem;
+    font-size: 2.6rem;
     font-weight: 700;
-    color: #f0e6c8;
+    color: #f5e9c8;
     letter-spacing: -0.5px;
-    line-height: 1.1;
+    line-height: 1.15;
     margin: 0;
 }
-.header-title span {
-    color: #c49a2a;
-}
+.header-title span { color: #c49a2a; }
 .header-subtitle {
     font-family: 'Source Sans 3', sans-serif;
-    font-size: 1rem;
+    font-size: 0.85rem;
     color: #8a7a5a;
     margin-top: 0.5rem;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     font-weight: 300;
 }
+.era-strip {
+    display: flex;
+    gap: 0.45rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 0 1.75rem;
+}
+.era-badge {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #9a8450;
+    border: 1px solid rgba(196,154,42,0.25);
+    border-radius: 20px;
+    padding: 0.22rem 0.7rem;
+    background: rgba(196,154,42,0.07);
+}
+.gold-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(196,154,42,0.3), transparent);
+    margin: 1.5rem 0 1.75rem;
+}
 
-/* ── Chat messages ── */
+/* ── Chat message containers ── */
 [data-testid="stChatMessage"] {
     background: transparent !important;
     border: none !important;
-    padding: 0.5rem 0 !important;
+    padding: 0.4rem 0 !important;
+    gap: 0.75rem !important;
 }
 
-/* User message bubble */
-[data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-user"]) .stMarkdown {
-    background: linear-gradient(135deg, #1e1608, #2a1e08) !important;
-    border: 1px solid rgba(196,154,42,0.3) !important;
-    border-radius: 18px 18px 4px 18px !important;
-    padding: 0.85rem 1.2rem !important;
-    font-family: 'Source Sans 3', sans-serif !important;
+/* All paragraph text inside chat */
+[data-testid="stChatMessage"] p,
+[data-testid="stChatMessage"] li,
+[data-testid="stChatMessage"] span,
+[data-testid="stChatMessage"] div {
     color: #e8d9b4 !important;
-    font-size: 0.97rem !important;
-    line-height: 1.6 !important;
-    max-width: 85% !important;
-    margin-left: auto !important;
-}
-
-/* Assistant message bubble */
-[data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-assistant"]) .stMarkdown {
-    background: rgba(255,255,255,0.04) !important;
-    border: 1px solid rgba(255,255,255,0.08) !important;
-    border-left: 3px solid #c49a2a !important;
-    border-radius: 4px 18px 18px 18px !important;
-    padding: 0.85rem 1.2rem !important;
     font-family: 'Source Sans 3', sans-serif !important;
-    color: #d4c4a0 !important;
     font-size: 0.97rem !important;
     line-height: 1.7 !important;
 }
 
-/* Avatar icons */
+/* User bubble wrapper */
+[data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-user"]) [data-testid="stMarkdownContainer"] {
+    background: rgba(196,154,42,0.1) !important;
+    border: 1px solid rgba(196,154,42,0.28) !important;
+    border-radius: 16px 16px 4px 16px !important;
+    padding: 0.8rem 1.1rem !important;
+}
+
+/* Assistant bubble wrapper */
+[data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-assistant"]) [data-testid="stMarkdownContainer"] {
+    background: rgba(255,255,255,0.04) !important;
+    border: 1px solid rgba(255,255,255,0.07) !important;
+    border-left: 3px solid #c49a2a !important;
+    border-radius: 4px 16px 16px 16px !important;
+    padding: 0.8rem 1.1rem !important;
+}
+
+/* Avatars */
 [data-testid="chatAvatarIcon-user"] {
     background: linear-gradient(135deg, #c49a2a, #8a6a18) !important;
     border-radius: 50% !important;
@@ -119,73 +151,55 @@ st.markdown("""
     border-radius: 50% !important;
 }
 
-/* ── Chat input ── */
-[data-testid="stChatInput"] {
-    background: rgba(255,255,255,0.04) !important;
-    border: 1px solid rgba(196,154,42,0.25) !important;
-    border-radius: 14px !important;
-    transition: border-color 0.2s ease !important;
+/* ── Chat input — FULL DARK THEME ── */
+[data-testid="stChatInputContainer"],
+[data-testid="stChatInput"],
+.stChatInput,
+[data-testid="stChatInput"] > div,
+[data-testid="stChatInputContainer"] > div {
+    background-color: #1a1408 !important;
+    border-color: rgba(196,154,42,0.3) !important;
+    border-radius: 12px !important;
 }
-[data-testid="stChatInput"]:focus-within {
-    border-color: rgba(196,154,42,0.6) !important;
-    box-shadow: 0 0 0 3px rgba(196,154,42,0.08) !important;
+[data-testid="stChatInput"]:focus-within,
+[data-testid="stChatInputContainer"]:focus-within {
+    border-color: rgba(196,154,42,0.65) !important;
+    box-shadow: 0 0 0 3px rgba(196,154,42,0.1) !important;
 }
-[data-testid="stChatInput"] textarea {
+[data-testid="stChatInput"] textarea,
+[data-testid="stChatInputContainer"] textarea {
+    background-color: #1a1408 !important;
     color: #e8d9b4 !important;
     font-family: 'Source Sans 3', sans-serif !important;
     font-size: 0.95rem !important;
-    background: transparent !important;
+    caret-color: #c49a2a !important;
 }
-[data-testid="stChatInput"] textarea::placeholder {
-    color: #6a5a3a !important;
+[data-testid="stChatInput"] textarea::placeholder,
+[data-testid="stChatInputContainer"] textarea::placeholder {
+    color: #5a4e30 !important;
     font-style: italic;
+}
+/* Submit button */
+[data-testid="stChatInputSubmitButton"] button {
+    background: rgba(196,154,42,0.15) !important;
+    border-color: rgba(196,154,42,0.4) !important;
+}
+[data-testid="stChatInputSubmitButton"] button:hover {
+    background: rgba(196,154,42,0.3) !important;
 }
 [data-testid="stChatInputSubmitButton"] svg {
     fill: #c49a2a !important;
+    stroke: #c49a2a !important;
 }
 
 /* ── Spinner ── */
-.stSpinner > div {
-    border-top-color: #c49a2a !important;
-}
+.stSpinner > div { border-top-color: #c49a2a !important; }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb {
-    background: rgba(196,154,42,0.3);
-    border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover { background: rgba(196,154,42,0.5); }
-
-/* ── Era badge strip ── */
-.era-strip {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 0 0 2rem;
-}
-.era-badge {
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: #7a6840;
-    border: 1px solid rgba(196,154,42,0.2);
-    border-radius: 20px;
-    padding: 0.25rem 0.75rem;
-    background: rgba(196,154,42,0.06);
-}
-
-/* ── Divider line ── */
-.gold-divider {
-    border: none;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(196,154,42,0.3), transparent);
-    margin: 2rem 0;
-}
+::-webkit-scrollbar-thumb { background: rgba(196,154,42,0.25); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(196,154,42,0.45); }
 </style>
 """, unsafe_allow_html=True)
 
@@ -196,7 +210,6 @@ st.markdown("""
     <h1 class="header-title"><span>Maria</span> — Philippine<br>History Assistant</h1>
     <p class="header-subtitle">Your AI guide through the ages</p>
 </div>
-
 <div class="era-strip">
     <span class="era-badge">Pre-colonial</span>
     <span class="era-badge">Spanish Era</span>
@@ -205,7 +218,6 @@ st.markdown("""
     <span class="era-badge">Independence</span>
     <span class="era-badge">Modern PH</span>
 </div>
-
 <hr class="gold-divider">
 """, unsafe_allow_html=True)
 
@@ -255,7 +267,6 @@ if prompt := st.chat_input("Ask me anything about Philippine history..."):
                 history = [{"role": "system", "content": system_prompt}]
                 for m in st.session_state.messages:
                     history.append({"role": m["role"], "content": m["content"]})
-
                 response = client.chat.completions.create(
                     model="llama-3.3-70b-versatile",
                     messages=history,
