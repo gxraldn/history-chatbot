@@ -27,45 +27,41 @@ section.main, .main, .block-container, [data-testid="stChatInputContainer"] {
     padding: 0 !important;
 }
 
-/* Force all white areas to dark */
+/* Aggressive dark background fix for bottom whites */
 [data-testid="stSidebar"], [data-testid="stToolbar"], footer, #MainMenu, .stDeployButton,
 section.main > div, [data-testid="stBottomBlockContainer"] > div,
-[data-testid="stChatInputContainer"] > div, .stChatInput, div.stChatInput {
+[data-testid="stChatInputContainer"] > div, .stChatInput, div.stChatInput,
+[data-testid="stChatInputContainer"] {
     background-color: #0e0b07 !important;
 }
 
-/* Dark chat input */
+/* Dark chat input matching the original image */
 [data-testid="stChatInputContainer"],
 [data-testid="stChatInput"],
 .stChatInput,
 [data-testid="stChatInput"] textarea {
     background-color: #1a1408 !important;
     color: #e8d9b4 !important;
-    border: 1px solid rgba(196,154,42,0.4) !important;
+    border: 1px solid rgba(196,154,42,0.5) !important;
     border-radius: 12px !important;
 }
 
-[data-testid="stChatInputContainer"] {
+[data-testid="stBottomBlockContainer"] {
     background: #0e0b07 !important;
-    padding: 0.5rem 1rem !important;
-}
-
-/* Remove any white borders or backgrounds */
-div[data-testid="stBottomBlockContainer"] {
-    background: #0e0b07 !important;
-    border-top: 1px solid rgba(196,154,42,0.2) !important;
+    border-top: 1px solid rgba(196,154,42,0.25) !important;
+    padding-top: 1rem !important;
 }
 
 .block-container {
     max-width: 820px !important;
-    padding: 2rem 1rem 5rem !important;
+    padding: 2rem 1rem 4rem !important;
     margin: 0 auto;
 }
 
-/* Header */
+/* Header to match image */
 .main-header {
     text-align: center;
-    padding: 2.5rem 0 1.5rem;
+    padding: 3rem 0 2rem;
 }
 .header-title {
     font-family: 'Playfair Display', serif;
