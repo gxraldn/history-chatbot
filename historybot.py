@@ -17,7 +17,7 @@ st.markdown("""
 
 html, body, [data-testid="stAppViewContainer"], .stApp, [data-testid="stMain"], 
 [data-testid="stVerticalBlock"], [data-testid="stBottomBlockContainer"], 
-section.main, .main, .block-container {
+section.main, .main, .block-container, [data-testid="stChatInputContainer"] {
     background-color: #0e0b07 !important;
     background-image: 
         radial-gradient(ellipse 80% 50% at 50% -10%, rgba(180,120,40,0.15) 0%, transparent 70%),
@@ -27,22 +27,30 @@ section.main, .main, .block-container {
     padding: 0 !important;
 }
 
-/* Force no white backgrounds */
+/* Force all white areas to dark */
 [data-testid="stSidebar"], [data-testid="stToolbar"], footer, #MainMenu, .stDeployButton,
-section.main > div, [data-testid="stChatInputContainer"] > div, 
-[data-testid="stBottomBlockContainer"] > div, .stChatInput {
+section.main > div, [data-testid="stBottomBlockContainer"] > div,
+[data-testid="stChatInputContainer"] > div, .stChatInput, div.stChatInput {
     background-color: #0e0b07 !important;
 }
 
-/* Chat input area - full dark */
+/* Dark chat input */
 [data-testid="stChatInputContainer"],
 [data-testid="stChatInput"],
-.stChatInput {
+.stChatInput,
+[data-testid="stChatInput"] textarea {
     background-color: #1a1408 !important;
-    border-color: rgba(196,154,42,0.3) !important;
+    color: #e8d9b4 !important;
+    border: 1px solid rgba(196,154,42,0.4) !important;
+    border-radius: 12px !important;
 }
 
-/* Remove any remaining white blocks */
+[data-testid="stChatInputContainer"] {
+    background: #0e0b07 !important;
+    padding: 0.5rem 1rem !important;
+}
+
+/* Remove any white borders or backgrounds */
 div[data-testid="stBottomBlockContainer"] {
     background: #0e0b07 !important;
     border-top: 1px solid rgba(196,154,42,0.2) !important;
