@@ -5,7 +5,7 @@ from groq import RateLimitError, APIConnectionError
 
 # ===================== CONFIG =====================
 st.set_page_config(page_title="Maria - PH History Bot", page_icon="🇵🇭", layout="centered")
-st.title("🇵🇭 Maria — Philippine History Assistant")
+st.title("Philippine History Assistant")
 st.markdown("**Your AI guide to Philippine history** — Ask me anything!")
 
 GROQ_API_KEY = st.secrets.get("GROQ_API_KEY") or os.getenv("GROQ_API_KEY")
