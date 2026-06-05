@@ -66,7 +66,7 @@ h1, h2, h3, p, li, div {
 }
 
 section[data-testid="stChatMessage"] {
-    background: rgba(15, 23, 42, 0.88);
+    background: #CFC8C8;
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 18px;
     padding: 0.25rem 0.5rem;
