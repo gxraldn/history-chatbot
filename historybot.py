@@ -11,129 +11,244 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# ===================== DARK THEME STYLING =====================
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background: linear-gradient(180deg, #0b0f14 0%, #111827 100%);
-        color: #e5e7eb;
-    }
+# ===================== THEME STATE =====================
+if "theme" not in st.session_state:
+    st.session_state.theme = "dark"
 
-    [data-testid="stHeader"] {
-        background: rgba(0,0,0,0);
-    }
+def toggle_theme():
+    st.session_state.theme = "light" if st.session_state.theme == "dark" else "dark"
+    st.rerun()
 
-    [data-testid="stToolbar"] {
-        right: 1rem;
-    }
+# ===================== THEME STYLES =====================
+dark_css = """
+<style>
+.stApp {
+    background: linear-gradient(180deg, #0b0f14 0%, #111827 100%);
+    color: #e5e7eb;
+}
 
-    .block-container {
-        padding-top: 3rem;
-        padding-bottom: 2rem;
-        max-width: 860px;
-    }
+[data-testid="stHeader"] {
+    background: rgba(0,0,0,0);
+}
 
-    h1 {
-        color: #f8fafc !important;
-        font-weight: 800;
-        letter-spacing: -0.03em;
-    }
+[data-testid="stToolbar"] {
+    right: 1rem;
+}
 
-    p, li, div {
-        color: #d1d5db;
-    }
+.block-container {
+    padding-top: 2.5rem;
+    padding-bottom: 6rem;
+    max-width: 860px;
+}
 
-    .hero-card {
-        background: rgba(17, 24, 39, 0.72);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 20px;
-        padding: 1.25rem 1.5rem;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-        margin-bottom: 1.25rem;
-        backdrop-filter: blur(10px);
-    }
+h1, h2, h3, p, li, div {
+    color: #e5e7eb;
+}
 
-    .hero-title {
-        font-size: 2.2rem;
-        font-weight: 800;
-        color: #f8fafc;
-        margin-bottom: 0.35rem;
-    }
+.hero-card {
+    background: rgba(17, 24, 39, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    margin-bottom: 1rem;
+    backdrop-filter: blur(10px);
+}
 
-    .hero-subtitle {
-        color: #cbd5e1;
-        font-size: 1rem;
-    }
+.hero-title {
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: #f8fafc;
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.03em;
+}
 
-    .accent {
-        color: #fbbf24;
-        font-weight: 700;
-    }
+.hero-subtitle {
+    color: #cbd5e1;
+    font-size: 1rem;
+}
 
-    section[data-testid="stChatMessage"] {
-        background: rgba(15, 23, 42, 0.82);
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        border-radius: 18px;
-        padding: 0.25rem 0.5rem;
-        margin-bottom: 0.75rem;
-    }
+.accent {
+    color: #fbbf24;
+    font-weight: 700;
+}
 
-    section[data-testid="stChatMessage"][data-testid="stChatMessageUser"] {
-        background: rgba(30, 41, 59, 0.92);
-    }
+section[data-testid="stChatMessage"] {
+    background: rgba(15, 23, 42, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 18px;
+    padding: 0.25rem 0.5rem;
+    margin-bottom: 0.75rem;
+}
 
-    section[data-testid="stChatMessage"] p {
-        color: #e5e7eb !important;
-    }
+section[data-testid="stChatMessage"] p {
+    color: #e5e7eb !important;
+}
 
-    .stChatInputContainer {
-        background: rgba(17, 24, 39, 0.96) !important;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
-    }
+.stChatInputContainer {
+    background: #0b0f14 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 0.75rem;
+}
 
-    [data-testid="stChatInput"] {
-        background: rgba(31, 41, 55, 0.95) !important;
-        border: 1px solid rgba(255, 255, 255, 0.10) !important;
-        border-radius: 16px !important;
-        color: #f8fafc !important;
-    }
+[data-testid="stChatInput"] {
+    background: rgba(31, 41, 55, 0.98) !important;
+    border: 1px solid rgba(255, 255, 255, 0.10) !important;
+    border-radius: 16px !important;
+    color: #f8fafc !important;
+}
 
-    [data-testid="stChatInput"]::placeholder {
-        color: #94a3b8 !important;
-    }
+[data-testid="stChatInput"] input {
+    color: #f8fafc !important;
+    caret-color: #f8fafc !important;
+}
 
-    .stButton > button {
-        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-        color: #111827;
-        border: none;
-        border-radius: 12px;
-        font-weight: 700;
-    }
+[data-testid="stChatInput"]::placeholder {
+    color: #94a3b8 !important;
+}
 
-    .stButton > button:hover {
-        background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-        color: #111827;
-    }
+.stButton > button {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: #111827;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+}
 
-    hr {
-        border-color: rgba(255,255,255,0.08);
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+.stButton > button:hover {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: #111827;
+}
+
+hr {
+    border-color: rgba(255,255,255,0.08);
+}
+</style>
+"""
+
+light_css = """
+<style>
+.stApp {
+    background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+    color: #0f172a;
+}
+
+[data-testid="stHeader"] {
+    background: rgba(0,0,0,0);
+}
+
+.block-container {
+    padding-top: 2.5rem;
+    padding-bottom: 6rem;
+    max-width: 860px;
+}
+
+h1, h2, h3, p, li, div {
+    color: #0f172a;
+}
+
+.hero-card {
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 20px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    margin-bottom: 1rem;
+    backdrop-filter: blur(10px);
+}
+
+.hero-title {
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.03em;
+}
+
+.hero-subtitle {
+    color: #334155;
+    font-size: 1rem;
+}
+
+.accent {
+    color: #b45309;
+    font-weight: 700;
+}
+
+section[data-testid="stChatMessage"] {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 18px;
+    padding: 0.25rem 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+section[data-testid="stChatMessage"] p {
+    color: #0f172a !important;
+}
+
+.stChatInputContainer {
+    background: #e2e8f0 !important;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+    padding-top: 0.75rem;
+}
+
+[data-testid="stChatInput"] {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border: 1px solid rgba(15, 23, 42, 0.12) !important;
+    border-radius: 16px !important;
+    color: #0f172a !important;
+}
+
+[data-testid="stChatInput"] input {
+    color: #0f172a !important;
+    caret-color: #0f172a !important;
+}
+
+[data-testid="stChatInput"]::placeholder {
+    color: #64748b !important;
+}
+
+.stButton > button {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+}
+
+.stButton > button:hover {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: white;
+}
+
+hr {
+    border-color: rgba(15,23,42,0.08);
+}
+</style>
+"""
+
+st.markdown(dark_css if st.session_state.theme == "dark" else light_css, unsafe_allow_html=True)
 
 # ===================== HEADER =====================
-st.markdown(
-    """
-    <div class="hero-card">
-        <div class="hero-title">🇵🇭 Maria — Philippine History Assistant</div>
-        <div class="hero-subtitle">Your AI guide to Philippine history, culture, and heritage. Ask about <span class="accent">pre-colonial</span>, <span class="accent">Spanish</span>, <span class="accent">American</span>, <span class="accent">Japanese</span>, and modern Philippine history.</div>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+col1, col2 = st.columns([6, 1])
+with col1:
+    st.markdown(
+        """
+        <div class="hero-card">
+            <div class="hero-title">🇵🇭 Maria — Philippine History Assistant</div>
+            <div class="hero-subtitle">Your AI guide to Philippine history, culture, and heritage. Ask about <span class="accent">pre-colonial</span>, <span class="accent">Spanish</span>, <span class="accent">American</span>, <span class="accent">Japanese</span>, and modern Philippine history.</div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+with col2:
+    st.button(
+        "🌙" if st.session_state.theme == "dark" else "☀️",
+        on_click=toggle_theme,
+        help="Toggle light and dark mode"
+    )
 
 # ===================== API KEY =====================
 GROQ_API_KEY = st.secrets.get("GROQ_API_KEY") or os.getenv("GROQ_API_KEY")
@@ -169,11 +284,9 @@ Response Structure:
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Optional starter note
 if len(st.session_state.messages) == 0:
     st.info("Try asking: **Who was José Rizal?** or **What happened during the Katipunan?**")
 
-# Display chat history
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
