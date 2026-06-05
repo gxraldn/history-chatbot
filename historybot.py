@@ -78,7 +78,7 @@ section[data-testid="stChatMessage"] p {
 }
 
 .stChatInputContainer {
-    background: #0b0f14 !important;
+    background: #CFC8C8 !important;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     padding-top: 0.75rem;
 }
