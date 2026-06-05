@@ -11,15 +11,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# ===================== THEME STATE =====================
-if "theme" not in st.session_state:
-    st.session_state.theme = "dark"
-
-def toggle_theme():
-    st.session_state.theme = "light" if st.session_state.theme == "dark" else "dark"
-    st.rerun()
-
-# ===================== THEME STYLES =====================
+# ===================== DARK THEME STYLES ONLY =====================
 dark_css = """
 <style>
 .stApp {
@@ -126,109 +118,7 @@ hr {
 </style>
 """
 
-light_css = """
-<style>
-.stApp {
-    background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
-    color: #0f172a;
-}
-
-[data-testid="stHeader"] {
-    background: rgba(0,0,0,0);
-}
-
-.block-container {
-    padding-top: 2.5rem;
-    padding-bottom: 6rem;
-    max-width: 860px;
-}
-
-h1, h2, h3, p, li, div {
-    color: #0f172a;
-}
-
-.hero-card {
-    background: rgba(255, 255, 255, 0.88);
-    border: 1px solid rgba(15, 23, 42, 0.08);
-    border-radius: 20px;
-    padding: 1.25rem 1.5rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    margin-bottom: 1rem;
-    backdrop-filter: blur(10px);
-}
-
-.hero-title {
-    font-size: 2.1rem;
-    font-weight: 800;
-    color: #0f172a;
-    margin-bottom: 0.35rem;
-    letter-spacing: -0.03em;
-}
-
-.hero-subtitle {
-    color: #334155;
-    font-size: 1rem;
-}
-
-.accent {
-    color: #b45309;
-    font-weight: 700;
-}
-
-section[data-testid="stChatMessage"] {
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(15, 23, 42, 0.08);
-    border-radius: 18px;
-    padding: 0.25rem 0.5rem;
-    margin-bottom: 0.75rem;
-}
-
-section[data-testid="stChatMessage"] p {
-    color: #0f172a !important;
-}
-
-.stChatInputContainer {
-    background: #e2e8f0 !important;
-    border-top: 1px solid rgba(15, 23, 42, 0.08);
-    padding-top: 0.75rem;
-}
-
-[data-testid="stChatInput"] {
-    background: rgba(255, 255, 255, 0.98) !important;
-    border: 1px solid rgba(15, 23, 42, 0.12) !important;
-    border-radius: 16px !important;
-    color: #0f172a !important;
-}
-
-[data-testid="stChatInput"] input {
-    color: #0f172a !important;
-    caret-color: #0f172a !important;
-}
-
-[data-testid="stChatInput"]::placeholder {
-    color: #64748b !important;
-}
-
-.stButton > button {
-    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-weight: 700;
-}
-
-.stButton > button:hover {
-    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-    color: white;
-}
-
-hr {
-    border-color: rgba(15,23,42,0.08);
-}
-</style>
-"""
-
-st.markdown(dark_css if st.session_state.theme == "dark" else light_css, unsafe_allow_html=True)
+st.markdown(dark_css, unsafe_allow_html=True)
 
 # ===================== HEADER =====================
 col1, col2 = st.columns([6, 1])
@@ -244,11 +134,7 @@ with col1:
     )
 
 with col2:
-    st.button(
-        "🌙" if st.session_state.theme == "dark" else "☀️",
-        on_click=toggle_theme,
-        help="Toggle light and dark mode"
-    )
+    st.empty()  # Removed the theme toggle button
 
 # ===================== API KEY =====================
 GROQ_API_KEY = st.secrets.get("GROQ_API_KEY") or os.getenv("GROQ_API_KEY")
