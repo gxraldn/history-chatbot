@@ -15,8 +15,8 @@ st.set_page_config(
 dark_css = """
 <style>
 .stApp {
-    background: #FFFFFF;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1) 100%);
+    background: #030202;
+background: linear-gradient(180deg, rgba(3, 2, 2, 1) 0%, rgba(105, 100, 100, 1) 50%, rgba(207, 200, 200, 1) 100%);
 }
 
 [data-testid="stHeader"] {
