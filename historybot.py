@@ -16,7 +16,7 @@ dark_css = """
 <style>
 .stApp {
     background: #12378c;
-    background: linear-gradient(120deg, rgba(18, 55, 140, 1) 0%, rgba(138, 117, 117, 1) 50%, rgba(255, 255, 255, 1) 100%);
+    background: linear-gradient(180deg, rgba(18, 55, 140, 1) 0%, rgba(138, 117, 117, 1) 50%, rgba(255, 255, 255, 1) 100%);
 }
 
 [data-testid="stHeader"] {
