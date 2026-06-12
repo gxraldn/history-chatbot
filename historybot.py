@@ -11,8 +11,8 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# ===================== LIGHT THEME STYLES ONLY =====================
-light_css = """
+# ===================== CUSTOM STYLES =====================
+custom_css = """
 <style>
 .stApp {
     background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
@@ -21,6 +21,18 @@ light_css = """
 
 [data-testid="stHeader"] {
     background: rgba(0,0,0,0);
+}
+
+div[data-testid="stToolbar"] {
+    display: none;
+}
+
+div[data-testid="stDecoration"] {
+    display: none;
+}
+
+header {
+    display: none;
 }
 
 .block-container {
@@ -73,10 +85,14 @@ section[data-testid="stChatMessage"] p {
     color: #0f172a !important;
 }
 
-.stChatInputContainer {
+div[data-testid="stChatFloatingInputContainer"] {
     background: #e2e8f0 !important;
-    border-top: 1px solid rgba(15, 23, 42, 0.08);
-    padding-top: 0.75rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-shadow: none !important;
+}
+
+div[data-testid="stChatFloatingInputContainer"] > div {
+    background: #e2e8f0 !important;
 }
 
 [data-testid="stChatInput"] {
@@ -114,7 +130,7 @@ hr {
 </style>
 """
 
-st.markdown(light_css, unsafe_allow_html=True)
+st.markdown(custom_css, unsafe_allow_html=True)
 
 # ===================== HEADER =====================
 col1, col2 = st.columns([6, 1])
@@ -130,7 +146,7 @@ with col1:
     )
 
 with col2:
-    st.empty()  # Removed the theme toggle button
+    st.empty()
 
 # ===================== API KEY =====================
 GROQ_API_KEY = st.secrets.get("GROQ_API_KEY") or os.getenv("GROQ_API_KEY")
