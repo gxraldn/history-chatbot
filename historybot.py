@@ -11,7 +11,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# ===================== CUSTOM STYLES =====================
+# ===================== STYLES =====================
 custom_css = """
 <style>
 .stApp {
@@ -35,9 +35,22 @@ header {
     display: none;
 }
 
+footer {
+    visibility: hidden;
+    height: 0;
+}
+
+div[data-testid="stStatusWidget"] {
+    display: none;
+}
+
+div[data-testid="stAppViewBlockContainer"] {
+    padding-bottom: 1rem !important;
+}
+
 .block-container {
     padding-top: 2.5rem;
-    padding-bottom: 6rem;
+    padding-bottom: 4rem;
     max-width: 860px;
 }
 
